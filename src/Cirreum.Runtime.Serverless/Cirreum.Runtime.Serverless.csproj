@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>Cirreum.Runtime</RootNamespace>
+		<Description>The Cirreum Runtime Serverless.</Description>
+		<PackageTags>cirreum;runtime;serverless</PackageTags>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Identity" Version="1.17.1" />
+		<PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore" Version="2.1.0" />
+		<PackageReference Include="Cirreum.Startup" Version="1.0.103" />
+		<PackageReference Include="Cirreum.Logging.Deferred" Version="1.0.102" />
+		<PackageReference Include="Cirreum.Services.Serverless" Version="1.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+
+		<Using Include="Cirreum" />
+		<Using Include="Cirreum.Authorization" />
+		<Using Include="Cirreum.Conductor" />
+		<Using Include="Cirreum.Exceptions" />
+		<Using Include="Cirreum.FileSystem" />
+		<Using Include="Cirreum.Security" />
+		<Using Include="Cirreum.Startup" />
+
+		<Using Include="Microsoft.AspNetCore.Http" />
+		<Using Include="Microsoft.AspNetCore.Builder" />
+		<Using Include="Microsoft.Extensions.Configuration" />
+		<Using Include="Microsoft.Extensions.DependencyInjection" />
+		<Using Include="Microsoft.Extensions.Hosting" />
+		<Using Include="Microsoft.Extensions.Logging" />
+		<Using Include="Microsoft.Extensions.Options" />
+
+	</ItemGroup>
+
+</Project>
