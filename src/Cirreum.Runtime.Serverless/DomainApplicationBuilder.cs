@@ -59,8 +59,16 @@ public sealed class DomainApplicationBuilder
 
 		functionBuilder.FunctionsApplicationBuilder.ConfigureFunctionsWebApplication();
 
-		// Domain Environment
-		functionBuilder.Services.AddSingleton<IDomainEnvironment, DomainEnvironment>();
+		// ******************************************************************************
+		// Resolve and Configure our Domain RuntimeType and add DomainEnvironment
+		//
+		var runtimeType = DomainRuntimeType.Function;
+		((IHostApplicationBuilder)functionBuilder).Properties[DomainContext.RuntimeTypeKey] = runtimeType;
+		functionBuilder.Services.AddSingleton<IDomainEnvironment>(sp => {
+			var hostEnv = sp.GetRequiredService<IHostEnvironment>();
+			return new DomainEnvironment(hostEnv.ApplicationName, hostEnv.EnvironmentName, runtimeType);
+		});
+
 
 		functionBuilder.AddCoreServices();
 

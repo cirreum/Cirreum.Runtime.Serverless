@@ -15,7 +15,7 @@
 		<PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore" Version="2.1.0" />
 		<PackageReference Include="Cirreum.Startup" Version="1.0.103" />
 		<PackageReference Include="Cirreum.Logging.Deferred" Version="1.0.102" />
-		<PackageReference Include="Cirreum.Services.Serverless" Version="1.0.0" />
+		<PackageReference Include="Cirreum.Services.Serverless" Version="1.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
