@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<RootNamespace>Cirreum.Runtime</RootNamespace>
@@ -13,9 +13,9 @@
 	<ItemGroup>
 		<PackageReference Include="Azure.Identity" Version="1.18.0" />
 		<PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore" Version="2.1.0" />
-		<PackageReference Include="Cirreum.Startup" Version="1.0.109" />
-		<PackageReference Include="Cirreum.Logging.Deferred" Version="1.0.107" />
-		<PackageReference Include="Cirreum.Services.Serverless" Version="1.0.25" />
+		<PackageReference Include="Cirreum.Startup" Version="1.0.110" />
+		<PackageReference Include="Cirreum.Logging.Deferred" Version="1.0.108" />
+		<PackageReference Include="Cirreum.Services.Serverless" Version="1.0.26" />
 	</ItemGroup>
 
 	<ItemGroup>
