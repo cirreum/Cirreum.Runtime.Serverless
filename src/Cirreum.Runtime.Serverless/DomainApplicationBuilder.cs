@@ -219,8 +219,8 @@ public sealed class DomainApplicationBuilder
 		//
 
 		// All remaining common services
+		this.Services.AddDefaultDomainDocumenter();
 		this.Services.AddDefaultAuthorizationEvaluator();
-		this.Services.AddDefaultAuthorizationDocumenter();
 
 		// ******************************************************************************
 		// App Domain - Conductor/FluentValidation/FluentAuthorization
