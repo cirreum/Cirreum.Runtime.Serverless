@@ -219,7 +219,6 @@ public sealed class DomainApplicationBuilder
 		//
 
 		// All remaining common services
-		this.Services.AddDefaultDomainDocumenter();
 		this.Services.AddDefaultAuthorizationEvaluator();
 
 		// ******************************************************************************
