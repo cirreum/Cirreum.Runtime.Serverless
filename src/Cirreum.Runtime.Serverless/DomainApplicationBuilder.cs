@@ -1,6 +1,7 @@
 ﻿namespace Cirreum.Runtime;
 
 using Cirreum.Conductor.Configuration;
+using Cirreum.Logging.Deferred;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Builder;
 using Microsoft.Extensions.Configuration;
@@ -227,6 +228,12 @@ public sealed class DomainApplicationBuilder
 		this.Services.AddDomainServices(this.Configuration, _conductorConfiguration);
 
 
+		// ******************************************************************************
+		// Ensure no build issues
+		//
+		ValidateDeferredLogs();
+
+
 		// Build the app!
 		using var app = this.FunctionsApplicationBuilder.Build();
 
@@ -237,6 +244,31 @@ public sealed class DomainApplicationBuilder
 
 		return app;
 
+	}
+
+	/// <summary>
+	/// Fails the build when configuration-time checks wrote Warning-or-worse deferred log
+	/// entries. The `FlushDeferredLogs` startup task surfaces informational entries once the
+	/// host is running, but a config-time error — e.g. Domain's dead-operations check, whose
+	/// operations will be denied on every dispatch — previously only logged and let the app
+	/// start. Mirrors the server builder's identical check: fail-fast at build, not a log
+	/// line after.
+	/// </summary>
+	private static void ValidateDeferredLogs() {
+		var issues = new[] {
+			(Level: LogLevel.Warning, Logs: Logger.GetAll(LogLevel.Warning)),
+			(Level: LogLevel.Error, Logs: Logger.GetAll(LogLevel.Error)),
+			(Level: LogLevel.Critical, Logs: Logger.GetAll(LogLevel.Critical))
+		};
+
+		foreach (var (level, logs) in issues) {
+			if (logs.Any()) {
+				throw new InvalidOperationException(
+					$"Configuration validation failed. The following {level} items were found:\n" +
+					string.Join("\n", logs.Select(l => l.Message))
+				);
+			}
+		}
 	}
 
 

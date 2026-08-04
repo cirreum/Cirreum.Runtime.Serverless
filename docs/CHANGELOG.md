@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Build-time deferred-log validation.** `Build` now fails when configuration-time checks
+  wrote Warning-or-worse deferred entries — e.g. Domain's dead-operations check, whose
+  operations will be denied on every dispatch. The `FlushDeferredLogs` startup task still
+  surfaces informational entries once the host runs; config-time errors now stop the build
+  instead of becoming a log line after startup. Mirrors the check the server builder has
+  always run. ⚠️ Hosts that were starting with such errors present will now fail fast at
+  build — that is the point.
+
 ## [1.0.54] - 2026-07-31
 
 ### Updated
