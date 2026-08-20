@@ -1,4 +1,4 @@
-# Changelog
+﻿# Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Added
+
+- **Interface-typed remote clients: `AddRemoteClient<TClient, TImplementation>`.** Registers a
+  remote client resolved by service type — typically an interface — and implemented by a
+  concrete typed client, matching the surface `Cirreum.Runtime.Wasm` gained in the same wave so
+  the two hosts stay symmetric. Both forms (configure and pre-built options) are mirrored. The
+  client name defaults to `TImplementation`, not `TClient`, so a client registered concretely
+  and one registered behind an interface address the same named client.
+
+### Changed
+
+- The remote-client registration internals take the typed-client registration as a delegate, so
+  the service-type-only and service-plus-implementation forms share one copy of the validation,
+  de-duplication, and credential wiring rather than a second copy that could drift. No public
+  behaviour changes.
+
+### Updated
+
+- Updated NuGet packages.
 
 ## [1.1.0] - 2026-08-04
 
